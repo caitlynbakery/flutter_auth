@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_practice/fruits_screen.dart';
+import 'package:flutter_auth_practice/login_screen.dart';
+import './sign_up_screen.dart';
+import './login_screen.dart';
+import './fruits_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  final _formKey = GlobalKey<FormState>();
-  String password;
-  String email;
+  
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,47 +25,13 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Auth Practice"),
-        ),
-       body: Form(key: _formKey, child: Column(children: [
-         
-         TextFormField(
-           decoration: InputDecoration(labelText: 'E-mail'),
-           validator: (value) {
-             if(value.isEmpty) {
-               return 'Please enter some text';
-             }
-             else {
-               email = value;
-             }
-             return null;
-           }
-         ),
-         TextFormField(
-           decoration: InputDecoration(labelText: 'Password'),
-           validator: (value) {
-             if(value.isEmpty) {
-               return 'Please enter some text';
-             }
-             else {
-               print('The password is $value');
-               
-             }
-             return null;
-           },
-         ),
-         ElevatedButton(onPressed: (){
-           if(_formKey.currentState.validate()) {
-            _formKey.currentState.reset();
-            print(email);
-            // Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-           }
-         }, child: Text('Create'))
-       ],),),
-        ),
-    
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginScreen(),
+        '/create': (context) => SignUpScreen(),
+        '/fruits': (context) => FruitsScreen()
+      },
     );
   }
 }
+
