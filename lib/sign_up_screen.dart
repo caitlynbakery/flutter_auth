@@ -50,6 +50,11 @@ class SignUpScreen extends StatelessWidget {
             'returnSecureToken': true}));
           print(email);
           print(response.body);
+          var idToken = json.decode(response.body)['idToken'];
+
+          if(idToken != null){
+            Navigator.pushNamed(context, '/fruits');
+          }
           _formKey.currentState.reset();
           // Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
          }
